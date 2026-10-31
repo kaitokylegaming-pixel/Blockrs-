@@ -1,0 +1,19 @@
+[package]
+name = "blockrs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+macroquad = "0.4"
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[package.metadata.android]
+package_name = "com.example.blockrs"
+label = "BlockRS"
+build_targets = ["armv7-linux-androideabi", "aarch64-linux-android"]
