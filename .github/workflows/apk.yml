@@ -1,0 +1,21 @@
+name: Build APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build APK (cargo-quad-apk in Docker)
+        run: |
+          docker run --rm -v "$PWD":/root/src -w /root/src notfl3/cargo-apk \
+            cargo quad-apk build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blockrs-apk
+          path: target/android-artifacts/**/*.apk
